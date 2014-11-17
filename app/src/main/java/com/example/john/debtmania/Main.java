@@ -33,4 +33,21 @@ public class Main extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void moneyOwed(String name, String description, float amount) {
+        //do something
+    }
+    public void debtCollected(String name, String description, float amount) {
+        //do something
+    }
+
+    public void sendMoneyOwed(String number, String description, float amount) {
+        //send something
+    }
+
+    public void sendDebtCollected(String number, String description, float amount) {
+        //send something
+    }
+
+
 }

@@ -23,11 +23,13 @@ public class SMSReceiver extends BroadcastReceiver {
         String msgString = message.getDisplayMessageBody();
         String phoneNumber = message.getDisplayOriginatingAddress();
 
+
+
         if(msgString.contains("OWE")) {
-            //add some info to database
+            //call something in main to add some info to database
         }
         else if(msgString.contains("COLLECTED")) {
-            //remove some info from the database
+            //call something in main to remove some info from the database
         }
     }
 }
