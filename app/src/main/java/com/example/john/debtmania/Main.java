@@ -2,16 +2,26 @@ package com.example.john.debtmania;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class Main extends Activity {
-
+    Button button, button2 = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SMSReceiver receiver = new SMSReceiver(this);
+        registerReceiver(receiver, SMSReceiver.filter);
+
+        //sendMoneyOwed("5556","Brandon","things",55.99);
+        //sendDebtCollected("5556","Brandon","things",55.99);
+
     }
 
 
@@ -34,19 +44,23 @@ public class Main extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void moneyOwed(String name, String description, float amount) {
+    public void moneyOwed(String name, String description, double amount) {
         //do something
     }
-    public void debtCollected(String name, String description, float amount) {
+    public void debtCollected(String name, String description, double amount) {
         //do something
     }
 
-    public void sendMoneyOwed(String number, String description, float amount) {
-        //send something
+    public void sendMoneyOwed(String number, String userName, String description, double amount) {
+        String msg = "OWE:"+amount+":"+description+":"+userName;
+        SmsManager manager = SmsManager.getDefault();
+        manager.sendTextMessage(number, null, msg, null, null);
     }
 
-    public void sendDebtCollected(String number, String description, float amount) {
-        //send something
+    public void sendDebtCollected(String number, String userName, String description, double amount) {
+        String msg = "COLLECTED:"+amount+":"+description+":"+userName;
+        SmsManager manager = SmsManager.getDefault();
+        manager.sendTextMessage(number, null, msg, null, null);
     }
 
 

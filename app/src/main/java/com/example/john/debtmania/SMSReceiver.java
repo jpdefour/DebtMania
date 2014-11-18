@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+import android.widget.Toast;
+
+import java.util.*;
 
 public class SMSReceiver extends BroadcastReceiver {
     static IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
@@ -14,6 +17,8 @@ public class SMSReceiver extends BroadcastReceiver {
     {
         main = _main;
     }
+    String name, description,type = null;
+    Double amount = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,13 +28,29 @@ public class SMSReceiver extends BroadcastReceiver {
         String msgString = message.getDisplayMessageBody();
         String phoneNumber = message.getDisplayOriginatingAddress();
 
+        //Messages format:
+        //"OWE:XX.XX:description:NAME"
+        //"COLLECTED:XX.XX:description:NAME"
 
 
-        if(msgString.contains("OWE")) {
-            //call something in main to add some info to database
+        StringTokenizer tokens = new StringTokenizer(msgString, ":");
+        type = tokens.nextToken();
+        amount = Double.valueOf(tokens.nextToken());
+        description = tokens.nextToken();
+        name = tokens.nextToken();
+
+
+        if(type.equals("OWE")) {
+            Toast toast = Toast.makeText(context, "$" + amount + " owed for " + description + " to " + name, Toast.LENGTH_LONG);
+            toast.show();
+
+            main.moneyOwed(name, description, amount);
         }
-        else if(msgString.contains("COLLECTED")) {
-            //call something in main to remove some info from the database
+        else if(type.equals("COLLECTED")) {
+            Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
+            toast.show();
+
+            main.debtCollected(name, description, amount);
         }
     }
 }
