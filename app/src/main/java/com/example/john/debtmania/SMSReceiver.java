@@ -33,6 +33,7 @@ public class SMSReceiver extends BroadcastReceiver {
         //"COLLECTED:XX.XX:description:NAME"
 
 
+        //Generates each of the given fields by separating the string at the : character
         StringTokenizer tokens = new StringTokenizer(msgString, ":");
         type = tokens.nextToken();
         amount = Double.valueOf(tokens.nextToken());
@@ -40,12 +41,14 @@ public class SMSReceiver extends BroadcastReceiver {
         name = tokens.nextToken();
 
 
+        //user owes money to someone
         if(type.equals("OWE")) {
             Toast toast = Toast.makeText(context, "$" + amount + " owed for " + description + " to " + name, Toast.LENGTH_LONG);
             toast.show();
 
             main.moneyOwed(name, description, amount);
         }
+        //user no longer owes money to someone
         else if(type.equals("COLLECTED")) {
             Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
             toast.show();

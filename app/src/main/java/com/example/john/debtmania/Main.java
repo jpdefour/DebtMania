@@ -16,9 +16,12 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Register the SMS Receiver
         SMSReceiver receiver = new SMSReceiver(this);
         registerReceiver(receiver, SMSReceiver.filter);
 
+        //send SMS message to notify that money is owed, or money collected
         //sendMoneyOwed("5556","Brandon","things",55.99);
         //sendDebtCollected("5556","Brandon","things",55.99);
 
@@ -44,19 +47,25 @@ public class Main extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //this is called when a user receives notification that they owe money
     public void moneyOwed(String name, String description, double amount) {
         //do something
     }
+    //this is called when user receives notification that they no longer owe money
     public void debtCollected(String name, String description, double amount) {
         //do something
     }
 
+    //this sends an SMS to the given number, letting the person at that number know they owe money to userName
+    //with given amount and description
     public void sendMoneyOwed(String number, String userName, String description, double amount) {
         String msg = "OWE:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
     }
 
+    //sends an SMS to the given number, letting that person know they no longer owe money to userName
+    //for the given amount and description
     public void sendDebtCollected(String number, String userName, String description, double amount) {
         String msg = "COLLECTED:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
