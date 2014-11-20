@@ -6,7 +6,7 @@ package com.example.john.debtmania;
 public class Debt {
     private String person;
     private String description;
-    private float moneyOwed;
+    private double moneyOwed;
 
     public String getPerson() {
         return person;
@@ -24,7 +24,7 @@ public class Debt {
         this.description = description;
     }
 
-    public float getMoneyOwed() {
+    public double getMoneyOwed() {
         return moneyOwed;
     }
 
