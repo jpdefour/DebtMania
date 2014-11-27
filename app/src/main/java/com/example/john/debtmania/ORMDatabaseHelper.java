@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
     static String databaseName = "dbAmount.db";
-    static int databaseVersion = 1;
+    static int databaseVersion = 3;
 
-    Dao<dbAmount, Integer> dbAmountsDao = null;
+    private Dao<dbAmount, Integer> dbAmountsDao = null;
     public Dao<dbAmount, Integer> getAmountDao() {
         if (dbAmountsDao == null) {
             try {
@@ -54,19 +54,20 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
         switch (newVersion) {
             case 1:
                 break;
-            case 2:
-                /*
+            case 3:
+
                 try {
                     TableUtils.createTable(connectionSource, dbAmount.class);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                */
+
                 break;
             default:
                 break;
 
         }
     }
+
 }
 

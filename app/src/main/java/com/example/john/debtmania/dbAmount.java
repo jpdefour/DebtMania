@@ -5,11 +5,13 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by mollyshrestha on 11/18/14.
  */
-@DatabaseTable(tableName = "amountown")
+@DatabaseTable(tableName = "dbamount")
 public class dbAmount {
     @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField(canBeNull = false)
     private String Name;
-    @DatabaseField(format = "##/##/##" )
+    @DatabaseField(format = "yyyyMMdd_HHmmss" )
     private String Date;
     @DatabaseField(defaultValue = "Unknown")
     private String Description;
@@ -55,5 +57,19 @@ public class dbAmount {
 
     public void setDate(String date) {
         Date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String toString()
+    {
+        return ("Date: " +  Date + ", Name: " + Name + ", Description: " + Description +
+                ", Amount: $" + amount);
     }
 }
