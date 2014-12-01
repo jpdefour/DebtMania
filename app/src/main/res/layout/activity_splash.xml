@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.john.debtmania.splash"
+    android:background="@drawable/debtmania">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name:"
+        android:id="@+id/nameView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editName"
+        android:layout_alignTop="@+id/nameView"
+        android:layout_toRightOf="@+id/nameView"
+        android:layout_alignBottom="@+id/nameView"
+        android:gravity="left"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Continue"
+        android:id="@+id/continueB"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editName"
+        android:layout_alignEnd="@+id/editName"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView"
+        android:textColor="@android:color/black"
+        android:alpha="1" />
+</RelativeLayout>
