@@ -20,5 +20,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/ormlite-android-4.48.jar')
+    compile files('libs/ormlite-core-4.48.jar')
+    compile files('libs/ormlite-jdbc-4.48.jar')
 }
