@@ -8,15 +8,49 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends Activity {
+<<<<<<< HEAD
 
+=======
+    Button btOwe, btOwed = null;
+    DebtAdapter adapter = null;
+    ListView listUserOwes = null;
+    ListView listOwedToUser = null;
+    ArrayList<Debt> debts = new ArrayList<Debt>();
+    ORMDatabaseHelper dbHelper = null;
+>>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
+=======
+        btOwe = (Button) findViewById(R.id.buttonOweYou);
+        btOwed = (Button) findViewById(R.id.buttonYouOwe);
+        listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
+        listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
+
+        adapter = new DebtAdapter(this, debts);
+        listUserOwes.setAdapter(adapter);
+        listOwedToUser.setAdapter(adapter);
+
+        dbHelper = new ORMDatabaseHelper(this);
+
+
+
+
+
+
+
+>>>>>>> master
         //Register the SMS Receiver
         SMSReceiver receiver = new SMSReceiver(this);
         registerReceiver(receiver, SMSReceiver.filter);
@@ -24,6 +58,34 @@ public class Main extends Activity {
         //send SMS message to notify that money is owed, or money collected
         //sendMoneyOwed("5556","Brandon","things",55.99);
         //sendDebtCollected("5556","Brandon","things",55.99);
+<<<<<<< HEAD
+=======
+
+        btOwe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), AmountOweActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                view.getContext().startActivity(i);
+            }
+        });
+
+        UpdateListView();
+
+    }
+
+    private void UpdateListView() {
+        try {
+            List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
+            for(Debt d : debtList)
+            {
+                debts.add(d);
+            }
+            adapter.notifyDataSetChanged();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+>>>>>>> master
     }
 
 

@@ -1,34 +1,75 @@
 package com.example.john.debtmania;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 /**
- * Created by John on 11/19/2014.
+ * Created by mollyshrestha on 11/18/14.
  */
+@DatabaseTable(tableName = "debt")
 public class Debt {
-    private String person;
-    private String description;
-    private double moneyOwed;
+    @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField(canBeNull = false)
+    private String Name;
+    @DatabaseField(format = "yyyyMMdd_HHmmss" )
+    private String Date;
+    @DatabaseField(defaultValue = "Unknown")
+    private String Description;
+    @DatabaseField (defaultValue = "0.0")
+    private float amount;
 
-    public String getPerson() {
-        return person;
+    public Debt(){}
+
+
+
+    public String toSting()
+    {
+        return (Name + ", " + Description + ", " + amount);
     }
 
-    public void setPerson(String person) {
-        this.person = person;
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
-    public double getMoneyOwed() {
-        return moneyOwed;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setMoneyOwed(float moneyOwed) {
-        this.moneyOwed = moneyOwed;
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String toString()
+    {
+        return ("Date: " +  Date + ", Name: " + Name + ", Description: " + Description +
+                ", Amount: $" + amount);
     }
 }

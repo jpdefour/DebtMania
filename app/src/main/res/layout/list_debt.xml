@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Person"
-        android:id="@+id/textView"
+        android:id="@+id/textPerson"
         android:capitalize="words" />
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Description"
-            android:id="@+id/textView2"
+            android:id="@+id/textDescription"
             android:layout_gravity="center_horizontal"
             android:capitalize="sentences" />
 
@@ -32,8 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Date"
+            android:id="@+id/textDate"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Money"
-            android:id="@+id/textView3"
+            android:id="@+id/textMoney"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </LinearLayout>
