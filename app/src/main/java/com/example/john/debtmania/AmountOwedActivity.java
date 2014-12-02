@@ -69,7 +69,7 @@ public class AmountOwedActivity extends Activity {
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
-                        sendDebtCollected(phnumber, name, description, amount);
+                        sendMoneyOwed(phnumber, name, description, amount);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -104,8 +104,8 @@ public class AmountOwedActivity extends Activity {
 
     //sends an SMS to the given number, letting that person know they no longer owe money to userName
     //for the given amount and description
-    public void sendDebtCollected(String number, String userName, String description, double amount) {
-        String msg = "COLLECTED:"+amount+":"+description+":"+userName;
+    public void sendMoneyOwed(String number, String userName, String description, double amount) {
+        String msg = "OWE:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
     }
