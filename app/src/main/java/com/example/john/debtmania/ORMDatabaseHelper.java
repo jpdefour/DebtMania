@@ -14,14 +14,14 @@ import java.sql.SQLException;
  * Created by mollyshrestha on 11/18/14.
  */
 public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
-    static String databaseName = "dbAmount.db";
+    static String databaseName = "Debt.db";
     static int databaseVersion = 3;
 
-    private Dao<dbAmount, Integer> dbAmountsDao = null;
-    public Dao<dbAmount, Integer> getAmountDao() {
+    private Dao<Debt, Integer> dbAmountsDao = null;
+    public Dao<Debt, Integer> getAmountDao() {
         if (dbAmountsDao == null) {
             try {
-                dbAmountsDao = getDao(dbAmount.class);
+                dbAmountsDao = getDao(Debt.class);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -39,7 +39,7 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, dbAmount.class);
+            TableUtils.createTable(connectionSource, Debt.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
             case 3:
 
                 try {
-                    TableUtils.createTable(connectionSource, dbAmount.class);
+                    TableUtils.createTable(connectionSource, Debt.class);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

@@ -60,7 +60,7 @@ public class AmountOweActivity extends Activity {
                     String currentDateandTime = date.format(new Date());
 
                     // ORM Style mapping
-                    dbAmount dbamount = new dbAmount();
+                    Debt dbamount = new Debt();
                     dbamount.setName(name);
                     dbamount.setDescription(description);
                     dbamount.setDate(currentDateandTime);
@@ -84,8 +84,8 @@ public class AmountOweActivity extends Activity {
     private void UpdateListView() {
         adapter.clear();
         try {
-            List<dbAmount> dbamounts = dbOrmAmount.getAmountDao().queryForAll();
-            for(dbAmount dba : dbamounts)
+            List<Debt> dbamounts = dbOrmAmount.getAmountDao().queryForAll();
+            for(Debt dba : dbamounts)
             {
                 adapter.add(dba.toString());
                 //dbOrmAmount.getAmountDao().delete(dba);   // To delete all entry for database

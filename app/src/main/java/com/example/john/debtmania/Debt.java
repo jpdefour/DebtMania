@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by mollyshrestha on 11/18/14.
  */
-@DatabaseTable(tableName = "dbamount")
+@DatabaseTable(tableName = "debt")
 public class Debt {
     @DatabaseField(generatedId = true)
     private int id;
