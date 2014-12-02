@@ -8,10 +8,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class Main extends Activity {
     Button btOwe, btOwed = null;
+    DebtAdapter adapter = null;
+    ListView listUserOwes = null;
+    ListView listOwedToUser = null;
+    ArrayList<Debt> debts = new ArrayList<Debt>();
+    ORMDatabaseHelper dbHelper = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +27,15 @@ public class Main extends Activity {
 
         btOwe = (Button) findViewById(R.id.buttonOweYou);
         btOwed = (Button) findViewById(R.id.buttonYouOwe);
+        listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
+        listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
+
+        adapter = new DebtAdapter(this, debts);
+        listUserOwes.setAdapter(adapter);
+        listOwedToUser.setAdapter(adapter);
+
+
+
 
 
         //Register the SMS Receiver
