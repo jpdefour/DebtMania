@@ -25,8 +25,6 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btOwe = (Button) findViewById(R.id.buttonOweYou);
-        btOwed = (Button) findViewById(R.id.buttonYouOwe);
         listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
         listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
 
@@ -36,6 +34,8 @@ public class Main extends Activity {
 
 
 
+        btOwe = (Button) findViewById(R.id.buttonYouOwe);
+        btOwed = (Button) findViewById(R.id.buttonOwed);
 
 
         //Register the SMS Receiver
@@ -50,6 +50,15 @@ public class Main extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), AmountOweActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                view.getContext().startActivity(i);
+            }
+        });
+
+        btOwed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), AmountOwedActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 view.getContext().startActivity(i);
             }
@@ -85,22 +94,5 @@ public class Main extends Activity {
     public void debtCollected(String name, String description, double amount) {
         //do something
     }
-
-    //this sends an SMS to the given number, letting the person at that number know they owe money to userName
-    //with given amount and description
-    public void sendMoneyOwed(String number, String userName, String description, double amount) {
-        String msg = "OWE:"+amount+":"+description+":"+userName;
-        SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(number, null, msg, null, null);
-    }
-
-    //sends an SMS to the given number, letting that person know they no longer owe money to userName
-    //for the given amount and description
-    public void sendDebtCollected(String number, String userName, String description, double amount) {
-        String msg = "COLLECTED:"+amount+":"+description+":"+userName;
-        SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(number, null, msg, null, null);
-    }
-
 
 }
