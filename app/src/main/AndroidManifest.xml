@@ -30,8 +30,13 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< Updated upstream
             android:name="com.example.john.debtmania.owedToYou"
             android:label="@string/title_activity_owed_to_you" >
+=======
+            android:name="com.example.john.debtmania.moneyOwed"
+            android:label="@string/title_activity_money_owed" >
+>>>>>>> Stashed changes
         </activity>
     </application>
 
