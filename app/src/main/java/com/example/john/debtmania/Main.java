@@ -21,10 +21,12 @@ import java.util.List;
 
 public class Main extends Activity {
     Button btOwe, btOwed = null;
-    DebtAdapter adapter = null;
+    DebtAdapter adapterUserOwes = null;
+    DebtAdapter adapterOwesUser = null;
     ListView listUserOwes = null;
     ListView listOwedToUser = null;
-    ArrayList<Debt> debts = new ArrayList<Debt>();
+    ArrayList<Debt> debtsUserOwes = new ArrayList<Debt>();
+    ArrayList<Debt> debtsOwedUser = new ArrayList<Debt>();
     ORMDatabaseHelper dbHelper = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +38,13 @@ public class Main extends Activity {
         listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
         listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
 
-        adapter = new DebtAdapter(this, debts);
-        listUserOwes.setAdapter(adapter);
-        listOwedToUser.setAdapter(adapter);
+        adapterUserOwes = new DebtAdapter(this, debtsUserOwes);
+        adapterOwesUser = new DebtAdapter(this, debtsOwedUser);
+
+        listUserOwes.setAdapter(adapterUserOwes);
+        listOwedToUser.setAdapter(adapterOwesUser);
 
         dbHelper = new ORMDatabaseHelper(this);
-
-
-
-
-
-
 
         //Register the SMS Receiver
         SMSReceiver receiver = new SMSReceiver(this);
@@ -68,22 +66,27 @@ public class Main extends Activity {
     }
 
     private void UpdateListView() {
-        QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
-
+        //QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
         try {
-            queryBuilder
+            /*queryBuilder
                     .where()
                     .gt("amount", 0);
             PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
             List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
+            */
 
-
-            //List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
+            List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
             for(Debt d : debtList)
             {
-                debts.add(d);
+                if(d.getAmount() < 0) {
+                    debtsUserOwes.add(d);
+                }
+                else if(d.getAmount() > 0){
+                    debtsOwedUser.add(d);
+                }
             }
-            adapter.notifyDataSetChanged();
+            adapterUserOwes.notifyDataSetChanged();
+            adapterOwesUser.notifyDataSetChanged();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,6 +137,5 @@ public class Main extends Activity {
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
     }
-
 
 }

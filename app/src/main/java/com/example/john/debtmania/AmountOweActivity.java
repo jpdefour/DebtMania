@@ -71,7 +71,7 @@ public class AmountOweActivity extends Activity {
                         e.printStackTrace();
                     }
                     UpdateListView();
-
+                    //TODO Notify the data sets that the data has changed.
                 }
                 catch (Exception e)
                 {
@@ -95,6 +95,7 @@ public class AmountOweActivity extends Activity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 
