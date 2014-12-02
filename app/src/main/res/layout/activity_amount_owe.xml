@@ -105,7 +105,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="text|numberSigned"
             android:ems="10"
             android:id="@+id/etAmount"
             android:layout_weight="1" />

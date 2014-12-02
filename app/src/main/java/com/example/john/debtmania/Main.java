@@ -10,15 +10,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends Activity {
     Button btOwe, btOwed = null;
-    DebtAdapter adapter = null;
+    DebtAdapter adapterUserOwes = null;
+    DebtAdapter adapterOwesUser = null;
     ListView listUserOwes = null;
     ListView listOwedToUser = null;
-    ArrayList<Debt> debts = new ArrayList<Debt>();
+    ArrayList<Debt> debtsUserOwes = new ArrayList<Debt>();
+    ArrayList<Debt> debtsOwedUser = new ArrayList<Debt>();
     ORMDatabaseHelper dbHelper = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +36,18 @@ public class Main extends Activity {
         listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
         listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
 
-        adapter = new DebtAdapter(this, debts);
-        listUserOwes.setAdapter(adapter);
-        listOwedToUser.setAdapter(adapter);
+        adapterUserOwes = new DebtAdapter(this, debtsUserOwes);
+        adapterOwesUser = new DebtAdapter(this, debtsOwedUser);
 
-
-
+<<<<<<< HEAD
         btOwe = (Button) findViewById(R.id.buttonYouOwe);
         btOwed = (Button) findViewById(R.id.buttonOwed);
+=======
+        listUserOwes.setAdapter(adapterUserOwes);
+        listOwedToUser.setAdapter(adapterOwesUser);
+>>>>>>> FETCH_HEAD
 
+        dbHelper = new ORMDatabaseHelper(this);
 
         //Register the SMS Receiver
         SMSReceiver receiver = new SMSReceiver(this);
@@ -54,7 +65,10 @@ public class Main extends Activity {
                 view.getContext().startActivity(i);
             }
         });
+        UpdateListView();
+    }
 
+<<<<<<< HEAD
         btOwed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +78,34 @@ public class Main extends Activity {
             }
         });
 
+=======
+    private void UpdateListView() {
+        //QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
+        try {
+            /*queryBuilder
+                    .where()
+                    .gt("amount", 0);
+            PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
+            List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
+            */
+
+            List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
+            for(Debt d : debtList)
+            {
+                if(d.getAmount() < 0) {
+                    debtsUserOwes.add(d);
+                }
+                else if(d.getAmount() > 0){
+                    debtsOwedUser.add(d);
+                }
+            }
+            adapterUserOwes.notifyDataSetChanged();
+            adapterOwesUser.notifyDataSetChanged();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+>>>>>>> FETCH_HEAD
     }
 
 
@@ -95,4 +137,23 @@ public class Main extends Activity {
         //do something
     }
 
+<<<<<<< HEAD
+=======
+    //this sends an SMS to the given number, letting the person at that number know they owe money to userName
+    //with given amount and description
+    public void sendMoneyOwed(String number, String userName, String description, double amount) {
+        String msg = "OWE:"+amount+":"+description+":"+userName;
+        SmsManager manager = SmsManager.getDefault();
+        manager.sendTextMessage(number, null, msg, null, null);
+    }
+
+    //sends an SMS to the given number, letting that person know they no longer owe money to userName
+    //for the given amount and description
+    public void sendDebtCollected(String number, String userName, String description, double amount) {
+        String msg = "COLLECTED:"+amount+":"+description+":"+userName;
+        SmsManager manager = SmsManager.getDefault();
+        manager.sendTextMessage(number, null, msg, null, null);
+    }
+
+>>>>>>> FETCH_HEAD
 }
