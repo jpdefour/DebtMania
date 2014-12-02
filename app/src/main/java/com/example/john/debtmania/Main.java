@@ -11,15 +11,11 @@ import android.widget.Button;
 
 
 public class Main extends Activity {
-    Button btOwe, btOwed = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        btOwe = (Button) findViewById(R.id.buttonOweYou);
-        btOwed = (Button) findViewById(R.id.buttonYouOwe);
-
 
         //Register the SMS Receiver
         SMSReceiver receiver = new SMSReceiver(this);
@@ -28,16 +24,6 @@ public class Main extends Activity {
         //send SMS message to notify that money is owed, or money collected
         //sendMoneyOwed("5556","Brandon","things",55.99);
         //sendDebtCollected("5556","Brandon","things",55.99);
-
-        btOwe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), AmountOweActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                view.getContext().startActivity(i);
-            }
-        });
-
     }
 
 
