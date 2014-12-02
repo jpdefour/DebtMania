@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,19 +64,27 @@ public class Main extends Activity {
                 view.getContext().startActivity(i);
             }
         });
-
         UpdateListView();
-
     }
 
     private void UpdateListView() {
+        QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
+
         try {
-            List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
+            queryBuilder
+                    .where()
+                    .gt("amount", 0);
+            PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
+            List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
+
+
+            //List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
             for(Debt d : debtList)
             {
                 debts.add(d);
             }
             adapter.notifyDataSetChanged();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

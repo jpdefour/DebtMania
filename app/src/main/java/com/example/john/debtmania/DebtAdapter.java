@@ -52,6 +52,13 @@ public class DebtAdapter extends BaseAdapter {
             date.setText(amount.getDate());
             money.setText(Float.toString(amount.getAmount()));
 
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO
+                }
+            });
+
 
             return v;
         }
