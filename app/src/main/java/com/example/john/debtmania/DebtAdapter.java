@@ -53,6 +53,10 @@ public class DebtAdapter extends BaseAdapter {
             date.setText(debt.getDate());
             money.setText(Float.toString(debt.getAmount()));
 
+            if(debt.getAmount() > 0){
+                v.setBackgroundColor(0xFF3BEA2A);
+            }
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
