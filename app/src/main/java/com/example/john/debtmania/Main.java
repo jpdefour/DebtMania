@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends Activity {
@@ -34,6 +36,10 @@ public class Main extends Activity {
         listUserOwes.setAdapter(adapter);
         listOwedToUser.setAdapter(adapter);
 
+        dbHelper = new ORMDatabaseHelper(this);
+
+
+
 
 
 
@@ -55,6 +61,21 @@ public class Main extends Activity {
             }
         });
 
+        UpdateListView();
+
+    }
+
+    private void UpdateListView() {
+        try {
+            List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
+            for(Debt d : debtList)
+            {
+                debts.add(d);
+            }
+            adapter.notifyDataSetChanged();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
