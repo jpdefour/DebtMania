@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create New Entry"
-        android:id="@+id/buttonYouOwe"
+        android:id="@+id/buttonCreate"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/listViewYouOwe"
-        android:layout_below="@+id/buttonYouOwe"
+        android:layout_below="@+id/buttonCreate"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -43,21 +43,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create New Entry"
-        android:id="@+id/buttonOwed"
-        android:layout_alignTop="@+id/textOweYou"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/listViewOweYou"
-        android:layout_below="@+id/buttonOwed"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
-
 </RelativeLayout>

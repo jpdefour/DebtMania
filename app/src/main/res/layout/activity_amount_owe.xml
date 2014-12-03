@@ -114,7 +114,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Enter Entry:"
+        android:text="DebtInformation:"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp"

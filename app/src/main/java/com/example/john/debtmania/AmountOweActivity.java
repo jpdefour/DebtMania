@@ -67,7 +67,7 @@ public class AmountOweActivity extends Activity {
                     dbamount.setName(name);
                     dbamount.setDescription(description);
                     dbamount.setDate(currentDateandTime);
-                    dbamount.setAmount(-1 * amount);
+                    dbamount.setAmount(amount);
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
@@ -89,7 +89,6 @@ public class AmountOweActivity extends Activity {
     //this sends an SMS to the given number, letting the person at that number know they owe money to userName
     //with given amount and description
     public void sendMoneyOwed(String number, String userName, String description, double amount) {
-        amount = amount * -1;
         String msg = "OWE:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
