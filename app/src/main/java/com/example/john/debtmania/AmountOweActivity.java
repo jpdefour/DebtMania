@@ -45,11 +45,6 @@ public class AmountOweActivity extends Activity {
         etPhnum = (EditText)findViewById(R.id.editTextphnum);
         dbOrmAmount = new ORMDatabaseHelper(this);
 
-        listView = (ListView)findViewById(R.id.listView);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
-        listView.setAdapter(adapter);
-        UpdateListView();
-
         etError.setText("");       // Clear erroinfo text
         btEnter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +68,12 @@ public class AmountOweActivity extends Activity {
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
                         //sendMoneyOwed(phnumber, name, description, amount);  // Send SMS to person
+                        Intent i = new Intent(view.getContext(), Main.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        view.getContext().startActivity(i);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    UpdateListView();
-
-                    //TODO Notify the data sets that the data has changed.
                 }
                 catch (Exception e)
                 {

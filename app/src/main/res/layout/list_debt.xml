@@ -6,21 +6,51 @@
     android:padding="6dp"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Person"
-        android:id="@+id/textPerson"
-        android:capitalize="words" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:longClickable="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Money"
+            android:id="@+id/textMoney"
+            android:textSize="20dp"
+            android:gravity="center|right"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:longClickable="true"
+            android:textColor="@android:color/white"
+            android:layout_toLeftOf="@+id/deleteButton"
+            android:layout_toStartOf="@+id/deleteButton" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Person"
+            android:id="@+id/textPerson"
+            android:layout_centerVertical="true"
+            android:capitalize="words"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:longClickable="true"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@+id/deleteButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Description"
@@ -28,24 +58,45 @@
             android:layout_gravity="center_horizontal"
             android:capitalize="sentences"
             android:textIsSelectable="false"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:longClickable="true"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@+id/deleteButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Date"
             android:id="@+id/textDate"
             android:layout_gravity="center_horizontal"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_below="@+id/textDescription"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:longClickable="true"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@+id/deleteButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Money"
-            android:id="@+id/textMoney"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp" />
-    </LinearLayout>
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:id="@+id/deleteButton"
+            android:src="@android:drawable/ic_delete"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
 </LinearLayout>
