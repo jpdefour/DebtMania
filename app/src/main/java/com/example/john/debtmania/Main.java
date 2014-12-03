@@ -131,10 +131,20 @@ public class Main extends Activity {
     //this is called when a user receives notification that they owe money
     public void moneyOwed(String name, String description, double amount) {
         //do something
+        debtsOwedUser.clear();
+        debtsUserOwes.clear();
+        adapterUserOwes.notifyDataSetChanged();
+        adapterOwesUser.notifyDataSetChanged();
+        UpdateListView();
     }
     //this is called when user receives notification that they no longer owe money
     public void debtCollected(String name, String description, double amount) {
         //do something
+        debtsOwedUser.clear();
+        debtsUserOwes.clear();
+        adapterUserOwes.notifyDataSetChanged();
+        adapterOwesUser.notifyDataSetChanged();
+        UpdateListView();
     }
 
     //this sends an SMS to the given number, letting the person at that number know they owe money to userName
