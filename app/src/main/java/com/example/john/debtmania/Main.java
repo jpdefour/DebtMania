@@ -142,7 +142,7 @@ public class Main extends Activity {
             String description = debt.getDescription();
             String number = debt.getNumber();
             float amount = debt.getAmount();
-            sendDebtCollected(number, username, description, amount);
+            sendDebtCollected(number, username, description, -1 * amount);
             dbHelper.getAmountDao().deleteById(id);
 
         } catch (SQLException e) {
