@@ -94,7 +94,6 @@ public class AmountOwedActivity extends Activity {
                      adapter.add(dba.toString());
                      //dbOrmAmount.getAmountDao().delete(dba);   // To delete all entry for database
                  }
-
             }
             adapter.notifyDataSetChanged();
         } catch (SQLException e) {

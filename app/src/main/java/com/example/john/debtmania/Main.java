@@ -66,6 +66,7 @@ public class Main extends Activity {
         UpdateListView();
 
 
+
         btOwed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +77,10 @@ public class Main extends Activity {
         });
 
     }
+
+
+
+
     private void UpdateListView() {
         //QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
         try {
@@ -148,5 +153,4 @@ public class Main extends Activity {
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
     }
-
 }

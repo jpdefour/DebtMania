@@ -3,7 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffff3541"
-    android:padding="11dp"
+    android:padding="6dp"
     android:weightSum="1">
 
     <TextView
@@ -26,7 +26,9 @@
             android:text="Description"
             android:id="@+id/textDescription"
             android:layout_gravity="center_horizontal"
-            android:capitalize="sentences" />
+            android:capitalize="sentences"
+            android:textIsSelectable="false"
+            android:textSize="14dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +36,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Date"
             android:id="@+id/textDate"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textSize="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,6 +45,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Money"
             android:id="@+id/textMoney"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp" />
     </LinearLayout>
 </LinearLayout>

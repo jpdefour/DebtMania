@@ -57,10 +57,11 @@ public class DebtAdapter extends BaseAdapter {
                 v.setBackgroundColor(0xFF3BEA2A);
             }
 
-            v.setOnClickListener(new View.OnClickListener() {
+            v.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View view) {
-                    //TODO
+                public boolean onLongClick(View view) {
+                    //TODO Have to pop up AlertDialog box and ask if the user wants to delete.
+                    return false;
                 }
             });
 
