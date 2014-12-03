@@ -20,7 +20,7 @@ import java.util.List;
 
 
 public class Main extends Activity {
-    Button btOwe, btOwed = null;
+    Button btCreate = null;
     DebtAdapter adapterUserOwes = null;
     DebtAdapter adapterOwesUser = null;
     ListView listUserOwes = null;
@@ -39,8 +39,7 @@ public class Main extends Activity {
         adapterUserOwes = new DebtAdapter(this, debtsUserOwes);
         adapterOwesUser = new DebtAdapter(this, debtsOwedUser);
 
-        btOwe = (Button) findViewById(R.id.buttonYouOwe);
-        btOwed = (Button) findViewById(R.id.buttonOwed);
+        btCreate = (Button) findViewById(R.id.buttonCreate);
 
         listUserOwes.setAdapter(adapterUserOwes);
         listOwedToUser.setAdapter(adapterOwesUser);
@@ -55,7 +54,7 @@ public class Main extends Activity {
         //sendMoneyOwed("5556","Brandon","things",55.99);
         //sendDebtCollected("5556","Brandon","things",55.99);
 
-        btOwe.setOnClickListener(new View.OnClickListener() {
+        btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), AmountOweActivity.class);
@@ -64,16 +63,6 @@ public class Main extends Activity {
             }
         });
         UpdateListView();
-
-
-        btOwed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), AmountOwedActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                view.getContext().startActivity(i);
-            }
-        });
 
     }
     private void UpdateListView() {

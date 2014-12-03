@@ -21,10 +21,6 @@
             android:label="@string/title_activity_amount_owe" >
         </activity>
         <activity
-            android:name="com.example.john.debtmania.AmountOwedActivity"
-            android:label="@string/title_activity_amount_owed" >
-        </activity>
-        <activity
             android:name="com.example.john.debtmania.Splash"
             android:label="@string/title_activity_splash"
 
