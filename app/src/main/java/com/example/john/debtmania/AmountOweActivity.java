@@ -1,6 +1,7 @@
 package com.example.john.debtmania;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -76,6 +77,7 @@ public class AmountOweActivity extends Activity {
                         e.printStackTrace();
                     }
                     UpdateListView();
+
                     //TODO Notify the data sets that the data has changed.
                 }
                 catch (Exception e)

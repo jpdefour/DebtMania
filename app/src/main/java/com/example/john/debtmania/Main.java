@@ -69,6 +69,7 @@ public class Main extends Activity {
 
 
     private void UpdateListView() {
+
         //QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
         try {
             /*queryBuilder
@@ -96,6 +97,16 @@ public class Main extends Activity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
+        debtsUserOwes.clear();
+        debtsOwedUser.clear();
+        adapterUserOwes.notifyDataSetChanged();
+        adapterOwesUser.notifyDataSetChanged();
+        UpdateListView();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
