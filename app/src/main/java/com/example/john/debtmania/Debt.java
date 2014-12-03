@@ -5,16 +5,16 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by mollyshrestha on 11/18/14.
  */
-@DatabaseTable(tableName = "debt")
+@DatabaseTable(tableName = "Debt")
 public class Debt {
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField(canBeNull = false)
-    private String Name;
+    private String name;
     @DatabaseField(format = "yyyyMMdd_HHmmss" )
-    private String Date;
+    private String date;
     @DatabaseField(defaultValue = "Unknown")
-    private String Description;
+    private String description;
     @DatabaseField (defaultValue = "0.0")
     private float amount;
 
@@ -24,23 +24,23 @@ public class Debt {
 
     public String toSting()
     {
-        return (Name + ", " + Description + ", " + amount);
+        return (name + ", " + description + ", " + amount);
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public float getAmount() {
@@ -52,11 +52,11 @@ public class Debt {
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public int getId() {
@@ -69,7 +69,8 @@ public class Debt {
 
     public String toString()
     {
-        return ("Date: " +  Date + ", Name: " + Name + ", Description: " + Description +
+        return ("date: " + date + ", name: " + name + ", description: " + description +
                 ", Amount: $" + amount);
     }
+
 }

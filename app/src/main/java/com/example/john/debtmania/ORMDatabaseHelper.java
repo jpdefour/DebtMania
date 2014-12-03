@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
     static String databaseName = "Debt.db";
-    static int databaseVersion = 3;
+    static int databaseVersion = 8;
 
     private Dao<Debt, Integer> dbAmountsDao = null;
     public Dao<Debt, Integer> getAmountDao() {
@@ -54,7 +54,7 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper {
         switch (newVersion) {
             case 1:
                 break;
-            case 3:
+            case 8:
 
                 try {
                     TableUtils.createTable(connectionSource, Debt.class);

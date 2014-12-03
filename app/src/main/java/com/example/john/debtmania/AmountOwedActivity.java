@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-public class AmountOweActivity extends Activity {
+public class AmountOwedActivity extends Activity {
     EditText etName = null;
     EditText etDescription = null;
     EditText etAmount = null;
@@ -31,17 +30,16 @@ public class AmountOweActivity extends Activity {
     ArrayList<String> data = new ArrayList<String>();
 
     ORMDatabaseHelper dbOrmAmount = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_amount_owe);
+        setContentView(R.layout.activity_amount_owed);
         etName = (EditText)findViewById(R.id.etName);
+        etPhnum = (EditText)findViewById(R.id.editTextphnum);
         etDescription = (EditText)findViewById(R.id.etDescription);
         etAmount = (EditText)findViewById(R.id.etAmount);
         etError = (TextView)findViewById(R.id.texteditError);
         btEnter = (Button)findViewById(R.id.btEnter);
-        etPhnum = (EditText)findViewById(R.id.editTextphnum);
         dbOrmAmount = new ORMDatabaseHelper(this);
 
         listView = (ListView)findViewById(R.id.listView);
@@ -67,16 +65,16 @@ public class AmountOweActivity extends Activity {
                     dbamount.setName(name);
                     dbamount.setDescription(description);
                     dbamount.setDate(currentDateandTime);
-                    dbamount.setAmount(amount);
+                    dbamount.setAmount(-1 * amount);
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
-                        sendMoneyOwed(phnumber, name, description, amount);  // Send SMS to person
+                        sendMoneyOwed(phnumber, name, description, amount);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                     UpdateListView();
-                    //TODO Notify the data sets that the data has changed.
+
                 }
                 catch (Exception e)
                 {
@@ -86,37 +84,36 @@ public class AmountOweActivity extends Activity {
         });
     }
 
-    //this sends an SMS to the given number, letting the person at that number know they owe money to userName
-    //with given amount and description
-    public void sendMoneyOwed(String number, String userName, String description, double amount) {
-        amount = amount * -1;
-        String msg = "OWE:"+amount+":"+description+":"+userName;
-        SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(number, null, msg, null, null);
-    }
-
     private void UpdateListView() {
         adapter.clear();
         try {
             List<Debt> dbamounts = dbOrmAmount.getAmountDao().queryForAll();
             for(Debt dba : dbamounts)
             {
-                if(dba.getAmount() > 0) {
-                    adapter.add(dba.toString());
-                }
+                 if(dba.getAmount() < 0) {
+                     adapter.add(dba.toString());
+                     //dbOrmAmount.getAmountDao().delete(dba);   // To delete all entry for database
+                 }
+
             }
             adapter.notifyDataSetChanged();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
+    //sends an SMS to the given number, letting that person know they no longer owe money to userName
+    //for the given amount and description
+    public void sendMoneyOwed(String number, String userName, String description, double amount) {
+        String msg = "OWE:"+amount+":"+description+":"+userName;
+        SmsManager manager = SmsManager.getDefault();
+        manager.sendTextMessage(number, null, msg, null, null);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_amount_owe, menu);
+        getMenuInflater().inflate(R.menu.menu_amount_owed, menu);
         return true;
     }
 

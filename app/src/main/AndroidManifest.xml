@@ -38,6 +38,10 @@
             android:label="@string/title_activity_money_owed" >
 >>>>>>> Stashed changes
         </activity>
+        <activity
+            android:name="com.example.john.debtmania.AmountOwedActivity"
+            android:label="@string/title_activity_amount_owed" >
+        </activity>
     </application>
 
 </manifest>

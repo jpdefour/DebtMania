@@ -46,11 +46,23 @@ public class DebtAdapter extends BaseAdapter {
             TextView date = (TextView) v.findViewById(R.id.textDate);
             TextView money = (TextView) v.findViewById(R.id.textMoney);
 
-            Debt amount = debts.get(i);
-            person.setText(amount.getName());
-            description.setText(amount.getDescription());
-            date.setText(amount.getDate());
-            money.setText(Float.toString(amount.getAmount()));
+            Debt debt = debts.get(i);
+
+            person.setText(debt.getName());
+            description.setText(debt.getDescription());
+            date.setText(debt.getDate());
+            money.setText(Float.toString(debt.getAmount()));
+
+            if(debt.getAmount() > 0){
+                v.setBackgroundColor(0xFF3BEA2A);
+            }
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO
+                }
+            });
 
 
             return v;

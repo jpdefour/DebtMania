@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +24,12 @@ public class Main extends Activity {
 
 =======
     Button btOwe, btOwed = null;
-    DebtAdapter adapter = null;
+    DebtAdapter adapterUserOwes = null;
+    DebtAdapter adapterOwesUser = null;
     ListView listUserOwes = null;
     ListView listOwedToUser = null;
-    ArrayList<Debt> debts = new ArrayList<Debt>();
+    ArrayList<Debt> debtsUserOwes = new ArrayList<Debt>();
+    ArrayList<Debt> debtsOwedUser = new ArrayList<Debt>();
     ORMDatabaseHelper dbHelper = null;
 >>>>>>> master
     @Override
@@ -32,23 +38,27 @@ public class Main extends Activity {
         setContentView(R.layout.activity_main);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         btOwe = (Button) findViewById(R.id.buttonOweYou);
         btOwed = (Button) findViewById(R.id.buttonYouOwe);
+=======
+>>>>>>> master
         listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
         listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
 
-        adapter = new DebtAdapter(this, debts);
-        listUserOwes.setAdapter(adapter);
-        listOwedToUser.setAdapter(adapter);
+        adapterUserOwes = new DebtAdapter(this, debtsUserOwes);
+        adapterOwesUser = new DebtAdapter(this, debtsOwedUser);
+
+<<<<<<< HEAD
+        btOwe = (Button) findViewById(R.id.buttonYouOwe);
+        btOwed = (Button) findViewById(R.id.buttonOwed);
+=======
+        listUserOwes.setAdapter(adapterUserOwes);
+        listOwedToUser.setAdapter(adapterOwesUser);
+>>>>>>> FETCH_HEAD
 
         dbHelper = new ORMDatabaseHelper(this);
-
-
-
-
-
-
 
 >>>>>>> master
         //Register the SMS Receiver
@@ -69,22 +79,50 @@ public class Main extends Activity {
                 view.getContext().startActivity(i);
             }
         });
-
         UpdateListView();
-
     }
 
+<<<<<<< HEAD
+        btOwed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), AmountOwedActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                view.getContext().startActivity(i);
+            }
+        });
+
+=======
     private void UpdateListView() {
+        //QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
         try {
+            /*queryBuilder
+                    .where()
+                    .gt("amount", 0);
+            PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
+            List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
+            */
+
             List<Debt> debtList = dbHelper.getAmountDao().queryForAll();
             for(Debt d : debtList)
             {
-                debts.add(d);
+                if(d.getAmount() < 0) {
+                    debtsUserOwes.add(d);
+                }
+                else if(d.getAmount() > 0){
+                    debtsOwedUser.add(d);
+                }
             }
-            adapter.notifyDataSetChanged();
+            adapterUserOwes.notifyDataSetChanged();
+            adapterOwesUser.notifyDataSetChanged();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
+>>>>>>> master
+=======
+>>>>>>> FETCH_HEAD
 >>>>>>> master
     }
 
@@ -117,6 +155,8 @@ public class Main extends Activity {
         //do something
     }
 
+<<<<<<< HEAD
+=======
     //this sends an SMS to the given number, letting the person at that number know they owe money to userName
     //with given amount and description
     public void sendMoneyOwed(String number, String userName, String description, double amount) {
@@ -133,5 +173,5 @@ public class Main extends Activity {
         manager.sendTextMessage(number, null, msg, null, null);
     }
 
-
+>>>>>>> FETCH_HEAD
 }
