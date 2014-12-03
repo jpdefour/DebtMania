@@ -173,6 +173,9 @@ public class Main extends Activity {
     //this is called when user receives notification that they no longer owe money
     public void debtCollected(String name, String description, float amount, String phoneNumber) {
         //do something
+        Toast toast = Toast.makeText(this,"DELETED", Toast.LENGTH_LONG);
+        toast.show();
+
         debtsOwedUser.clear();
         debtsUserOwes.clear();
         adapterUserOwes.notifyDataSetChanged();

@@ -17,6 +17,8 @@ public class Debt {
     private String description;
     @DatabaseField (defaultValue = "0.0")
     private float amount;
+    @DatabaseField(canBeNull = false)
+    private String number;
 
     public Debt(){}
 
@@ -66,6 +68,8 @@ public class Debt {
     public void setId(int id) {
         this.id = id;
     }
+    public void setNumber(String number) { this.number = number;}
+    public String getNumber(String number) { return this.number; }
 
     public String toString()
     {

@@ -69,6 +69,7 @@ public class AmountOweActivity extends Activity {
                     dbamount.setDescription(description);
                     dbamount.setDate(currentDateandTime);
                     dbamount.setAmount(amount);
+                    dbamount.setNumber(phnumber);
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);

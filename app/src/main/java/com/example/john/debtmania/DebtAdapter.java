@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 public class DebtAdapter extends BaseAdapter {
     Context context = null;
     ArrayList<Debt> debts = null;
+    ORMDatabaseHelper dbHelper = null;
+
 
     Main main = null;
 
@@ -44,15 +47,18 @@ public class DebtAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View v, ViewGroup viewGroup) {
+
             if(v == null) {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 v = inflater.inflate(R.layout.list_debt, null);
             }
+            dbHelper = new ORMDatabaseHelper(v.getContext());
 
             TextView person = (TextView) v.findViewById(R.id.textPerson);
             TextView description = (TextView) v.findViewById(R.id.textDescription);
             TextView date = (TextView) v.findViewById(R.id.textDate);
             TextView money = (TextView) v.findViewById(R.id.textMoney);
+            TextView phone = (TextView) v.findViewById(R.id.phone);
             ImageButton delete = (ImageButton) v.findViewById(R.id.deleteButton);
 
 
@@ -67,12 +73,16 @@ public class DebtAdapter extends BaseAdapter {
                 v.setBackgroundColor(0x5F3BEA2A);
             }
 
+            delete.setTag(debt.getId());
             delete.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    //TODO Have to pop up AlertDialog box and ask if the user wants to delete.
-                    Toast toast = Toast.makeText(view.getContext(), "DELETE", Toast.LENGTH_LONG);
-                    toast.show();
+                    try {
+                        dbHelper.getAmountDao().deleteById( (Integer) view.getTag());
+                        main.debtCollected("meow", "meow", 55f, "meow");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     return false;
                 }
             });
