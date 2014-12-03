@@ -136,6 +136,25 @@ public class Main extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void deleteItem(Integer id) {
+        try {
+            Debt debt = dbHelper.getAmountDao().queryForId(id);
+            String description = debt.getDescription();
+            String number = debt.getNumber();
+            float amount = debt.getAmount();
+            sendDebtCollected(number, username, description, amount);
+            dbHelper.getAmountDao().deleteById(id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        debtsOwedUser.clear();
+        debtsUserOwes.clear();
+        adapterUserOwes.notifyDataSetChanged();
+        adapterOwesUser.notifyDataSetChanged();
+        UpdateListView();
+    }
+
     //this is called when a user receives notification that they owe money
     public void moneyOwed(String name, String description, float amount, String phoneNumber) {
         //do something
@@ -193,9 +212,11 @@ public class Main extends Activity {
 
     //sends an SMS to the given number, letting that person know they no longer owe money to userName
     //for the given amount and description
-    public void sendDebtCollected(String number, String userName, String description, double amount) {
+    public void sendDebtCollected(String number, String userName, String description, float amount) {
         String msg = "COLLECTED:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
+        Toast toast = Toast.makeText(this,msg, Toast.LENGTH_LONG);
+        toast.show();
     }
 }

@@ -69,7 +69,7 @@ public class Debt {
         this.id = id;
     }
     public void setNumber(String number) { this.number = number;}
-    public String getNumber(String number) { return this.number; }
+    public String getNumber() { return this.number; }
 
     public String toString()
     {

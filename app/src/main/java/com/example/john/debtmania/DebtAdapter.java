@@ -77,12 +77,8 @@ public class DebtAdapter extends BaseAdapter {
             delete.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    try {
-                        dbHelper.getAmountDao().deleteById( (Integer) view.getTag());
-                        main.debtCollected("meow", "meow", 55f, "meow");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    main.deleteItem((Integer) view.getTag());
+
                     return false;
                 }
             });
