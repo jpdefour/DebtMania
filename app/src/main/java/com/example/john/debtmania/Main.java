@@ -9,13 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,6 +26,7 @@ public class Main extends Activity {
     Button btCreate = null;
     DebtAdapter adapterUserOwes = null;
     DebtAdapter adapterOwesUser = null;
+    String username = null;
     ListView listUserOwes = null;
     ListView listOwedToUser = null;
     ArrayList<Debt> debtsUserOwes = new ArrayList<Debt>();
@@ -33,11 +37,14 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
+
         listUserOwes = (ListView) findViewById(R.id.listViewYouOwe);
         listOwedToUser = (ListView) findViewById(R.id.listViewOweYou);
 
-        adapterUserOwes = new DebtAdapter(this, debtsUserOwes);
-        adapterOwesUser = new DebtAdapter(this, debtsOwedUser);
+        adapterUserOwes = new DebtAdapter(this, debtsUserOwes, this);
+        adapterOwesUser = new DebtAdapter(this, debtsOwedUser, this);
 
         btCreate = (Button) findViewById(R.id.buttonCreate);
 
@@ -58,6 +65,7 @@ public class Main extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), AmountOweActivity.class);
+                i.putExtra("username", username);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 view.getContext().startActivity(i);
             }
@@ -129,16 +137,41 @@ public class Main extends Activity {
     }
 
     //this is called when a user receives notification that they owe money
-    public void moneyOwed(String name, String description, double amount) {
+    public void moneyOwed(String name, String description, float amount, String phoneNumber) {
         //do something
+        try
+        {
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+            String currentDateandTime = date.format(new Date());
+            // ORM Style mapping
+            Debt dbamount = new Debt();
+            dbamount.setName(name);
+            dbamount.setDescription(description);
+            dbamount.setDate(currentDateandTime);
+            dbamount.setAmount(-1 * amount);
+
+            try {
+                dbHelper.getAmountDao().create(dbamount);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+
+        Toast toast = Toast.makeText(this, "$" + amount + " owed for " + description + " to " + name, Toast.LENGTH_LONG);
+        toast.show();
+
         debtsOwedUser.clear();
         debtsUserOwes.clear();
         adapterUserOwes.notifyDataSetChanged();
         adapterOwesUser.notifyDataSetChanged();
         UpdateListView();
+
     }
     //this is called when user receives notification that they no longer owe money
-    public void debtCollected(String name, String description, double amount) {
+    public void debtCollected(String name, String description, float amount, String phoneNumber) {
         //do something
         debtsOwedUser.clear();
         debtsUserOwes.clear();

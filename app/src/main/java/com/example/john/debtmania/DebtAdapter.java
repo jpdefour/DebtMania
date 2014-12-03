@@ -19,9 +19,12 @@ public class DebtAdapter extends BaseAdapter {
     Context context = null;
     ArrayList<Debt> debts = null;
 
-    public DebtAdapter(Context c, ArrayList<Debt> _debts) {
+    Main main = null;
+
+    public DebtAdapter(Context c, ArrayList<Debt> _debts, Main _main) {
         context = c;
         debts = _debts;
+        main = _main;
     }
 
     @Override
@@ -52,7 +55,6 @@ public class DebtAdapter extends BaseAdapter {
             TextView money = (TextView) v.findViewById(R.id.textMoney);
             ImageButton delete = (ImageButton) v.findViewById(R.id.deleteButton);
 
-            delete.setVisibility(View.GONE);
 
             Debt debt = debts.get(i);
 
@@ -63,7 +65,6 @@ public class DebtAdapter extends BaseAdapter {
 
             if(debt.getAmount() > 0){
                 v.setBackgroundColor(0x5F3BEA2A);
-                delete.setVisibility(View.VISIBLE);
             }
 
             delete.setOnLongClickListener(new View.OnLongClickListener() {

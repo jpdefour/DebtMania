@@ -12,7 +12,7 @@
         android:longClickable="true">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Money"
@@ -20,18 +20,15 @@
             android:textSize="20dp"
             android:gravity="center|right"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:clickable="false"
             android:focusable="false"
             android:enabled="false"
             android:longClickable="true"
             android:textColor="@android:color/white"
-            android:layout_toLeftOf="@+id/deleteButton"
-            android:layout_toStartOf="@+id/deleteButton" />
+            android:layout_toLeftOf="@+id/deleteButton" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Person"
@@ -50,7 +47,7 @@
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Description"
@@ -65,28 +62,7 @@
             android:enabled="false"
             android:longClickable="true"
             android:textColor="@android:color/white"
-            android:layout_toEndOf="@+id/deleteButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Date"
-            android:id="@+id/textDate"
-            android:layout_gravity="center_horizontal"
-            android:textSize="16dp"
-            android:gravity="center"
-            android:layout_below="@+id/textDescription"
-            android:clickable="false"
-            android:focusable="false"
-            android:enabled="false"
-            android:longClickable="true"
-            android:textColor="@android:color/white"
-            android:layout_toEndOf="@+id/deleteButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerHorizontal="true" />
 
         <ImageButton
             android:layout_width="25dp"
@@ -97,6 +73,22 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Date"
+            android:id="@+id/textDate"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:longClickable="true"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textDescription" />
 
     </RelativeLayout>
 </LinearLayout>

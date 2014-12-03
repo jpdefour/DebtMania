@@ -7,10 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Splash extends Activity {
     Button continueB = null;
+    EditText name = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +21,14 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
 
         continueB = (Button) findViewById(R.id.continueButton);
+        name = (EditText) findViewById(R.id.name);
 
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), Main.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                i.putExtra("username", name.getText().toString());
                 view.getContext().startActivity(i);
             }
         });

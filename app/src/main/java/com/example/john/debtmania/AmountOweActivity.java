@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ public class AmountOweActivity extends Activity {
     EditText etPhnum = null;
     TextView etError = null;
     Button btEnter = null;
+    String username = null;
     ListView listView = null;
     ArrayAdapter<String> adapter = null;
     ArrayList<String> data = new ArrayList<String>();
@@ -37,6 +39,9 @@ public class AmountOweActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amount_owe);
+
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
         etName = (EditText)findViewById(R.id.etName);
         etDescription = (EditText)findViewById(R.id.etDescription);
         etAmount = (EditText)findViewById(R.id.etAmount);
@@ -67,7 +72,7 @@ public class AmountOweActivity extends Activity {
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
-                        //sendMoneyOwed(phnumber, name, description, amount);  // Send SMS to person
+                        sendMoneyOwed(phnumber, username, description, amount);  // Send SMS to person
                         Intent i = new Intent(view.getContext(), Main.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         view.getContext().startActivity(i);

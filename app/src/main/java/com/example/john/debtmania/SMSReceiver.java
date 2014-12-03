@@ -18,7 +18,7 @@ public class SMSReceiver extends BroadcastReceiver {
         main = _main;
     }
     String name, description,type = null;
-    Double amount = null;
+    Float amount = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -36,24 +36,22 @@ public class SMSReceiver extends BroadcastReceiver {
         //Generates each of the given fields by separating the string at the : character
         StringTokenizer tokens = new StringTokenizer(msgString, ":");
         type = tokens.nextToken();
-        amount = Double.valueOf(tokens.nextToken());
+        amount = Float.valueOf(tokens.nextToken());
         description = tokens.nextToken();
         name = tokens.nextToken();
 
 
         //user owes money to someone
         if(type.equals("OWE")) {
-            Toast toast = Toast.makeText(context, "$" + amount + " owed for " + description + " to " + name, Toast.LENGTH_LONG);
-            toast.show();
 
-            main.moneyOwed(name, description, amount);
+            main.moneyOwed(name, description, amount, phoneNumber);
         }
         //user no longer owes money to someone
         else if(type.equals("COLLECTED")) {
             Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
             toast.show();
 
-            main.debtCollected(name, description, amount);
+            main.debtCollected(name, description, amount, phoneNumber);
         }
     }
 }
