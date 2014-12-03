@@ -50,7 +50,6 @@ public class SMSReceiver extends BroadcastReceiver {
         else if(type.equals("COLLECTED")) {
             Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
             toast.show();
-
             main.debtCollected(name, description, amount, phoneNumber);
         }
     }

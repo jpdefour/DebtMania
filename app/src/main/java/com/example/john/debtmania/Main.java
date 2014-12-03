@@ -191,8 +191,23 @@ public class Main extends Activity {
     }
     //this is called when user receives notification that they no longer owe money
     public void debtCollected(String name, String description, float amount, String phoneNumber) {
-        //do something
-        Toast toast = Toast.makeText(this,"DELETED", Toast.LENGTH_LONG);
+        try {
+            Debt dbamount = new Debt();
+            dbamount.setName(name);
+            dbamount.setDescription(description);
+            dbamount.setAmount(amount);
+
+            try {
+                dbHelper.getAmountDao().delete(dbamount);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+
+        Toast toast = Toast.makeText(this, "DELETED", Toast.LENGTH_LONG);
         toast.show();
 
         debtsOwedUser.clear();
@@ -202,21 +217,11 @@ public class Main extends Activity {
         UpdateListView();
     }
 
-    //this sends an SMS to the given number, letting the person at that number know they owe money to userName
-    //with given amount and description
-    public void sendMoneyOwed(String number, String userName, String description, double amount) {
-        String msg = "OWE:"+amount+":"+description+":"+userName;
-        SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(number, null, msg, null, null);
-    }
-
     //sends an SMS to the given number, letting that person know they no longer owe money to userName
     //for the given amount and description
     public void sendDebtCollected(String number, String userName, String description, float amount) {
         String msg = "COLLECTED:"+amount+":"+description+":"+userName;
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(number, null, msg, null, null);
-        Toast toast = Toast.makeText(this,msg, Toast.LENGTH_LONG);
-        toast.show();
     }
 }
