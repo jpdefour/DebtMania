@@ -101,11 +101,12 @@ public class Main extends Activity {
     protected void onRestart() {
 
         super.onRestart();
-        debtsUserOwes.clear();
         debtsOwedUser.clear();
+        debtsUserOwes.clear();
         adapterUserOwes.notifyDataSetChanged();
         adapterOwesUser.notifyDataSetChanged();
         UpdateListView();
+
     }
 
     @Override

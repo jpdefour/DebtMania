@@ -37,10 +37,12 @@ public class DebtAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        if (view == null) {
-            View v = inflater.inflate(R.layout.list_debt, null);
+    public View getView(int i, View v, ViewGroup viewGroup) {
+            if(v == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                v = inflater.inflate(R.layout.list_debt, null);
+            }
+
             TextView person = (TextView) v.findViewById(R.id.textPerson);
             TextView description = (TextView) v.findViewById(R.id.textDescription);
             TextView date = (TextView) v.findViewById(R.id.textDate);
@@ -68,6 +70,5 @@ public class DebtAdapter extends BaseAdapter {
 
             return v;
         }
-        return view;
     }
-}
+
