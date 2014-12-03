@@ -67,11 +67,11 @@ public class AmountOweActivity extends Activity {
                     dbamount.setName(name);
                     dbamount.setDescription(description);
                     dbamount.setDate(currentDateandTime);
-                    dbamount.setAmount(amount);
+                    dbamount.setAmount(-1 * amount);
 
                     try {
                         dbOrmAmount.getAmountDao().create(dbamount);
-                        sendMoneyOwed(phnumber, name, description, amount);  // Send SMS to person
+                        //sendMoneyOwed(phnumber, name, description, amount);  // Send SMS to person
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -101,7 +101,7 @@ public class AmountOweActivity extends Activity {
             List<Debt> dbamounts = dbOrmAmount.getAmountDao().queryForAll();
             for(Debt dba : dbamounts)
             {
-                if(dba.getAmount() > 0) {
+                if(dba.getAmount() < 0) {
                     adapter.add(dba.toString());
                 }
             }
