@@ -197,15 +197,20 @@ public class Main extends Activity {
             //TODO acceptable, but there is a better way to do this.
             queryBuilder
                 .where()
-                .eq("number", phoneNumber)
+                .eq("name", name)
                 .and()
                 .eq("amount", amount)
+                .and()
+                .eq("description", description)
                 ;
             PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
             List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
             Debt debt = debtList.get(0);
+            int IDNumber = debt.getId();
+
+
             try {
-                dbHelper.getAmountDao().delete(debt);
+                dbHelper.getAmountDao().deleteById(IDNumber);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -213,9 +218,6 @@ public class Main extends Activity {
         catch (Exception e)
         {
         }
-
-        Toast toast = Toast.makeText(this, "DELETED", Toast.LENGTH_LONG);
-        toast.show();
 
         debtsOwedUser.clear();
         debtsUserOwes.clear();

@@ -36,7 +36,7 @@ public class Splash extends Activity {
                 }
                 else {
                     CharSequence sequence = "Not valid";
-                    Toast.makeText(view.getContext(), sequence, Toast.LENGTH_SHORT);
+                    Toast.makeText(view.getContext(), sequence, Toast.LENGTH_SHORT).show();
                 }
             }
         });
