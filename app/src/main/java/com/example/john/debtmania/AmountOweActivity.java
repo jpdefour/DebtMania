@@ -74,6 +74,10 @@ public class AmountOweActivity extends Activity {
                     try {
                         dbOrmAmount.getAmountDao().create(debt);
                         sendMoneyOwed(phnumber, username, description, amount);  // Send SMS to person
+                        etName.setText("");
+                        etDescription.setText("");
+                        etAmount.setText("");
+                        etPhnum.setText("");
                         Intent i = new Intent(view.getContext(), Main.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         view.getContext().startActivity(i);
