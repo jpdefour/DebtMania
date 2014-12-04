@@ -193,14 +193,19 @@ public class Main extends Activity {
     //this is called when user receives notification that they no longer owe money
     public void debtCollected(String name, String description, float amount, String phoneNumber) {
         try {
-            Debt dbamount = new Debt();
-            dbamount.setName(name);
-            dbamount.setDescription(description);
-            dbamount.setAmount(amount);
-            dbamount.setNumber(phoneNumber);
+            QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
 
+            queryBuilder
+                .where()
+                .eq("number", phoneNumber)
+                .and()
+                .eq("amount", amount)
+                ;
+            PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
+            List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
+            Debt debt = debtList.get(0);
             try {
-                dbHelper.getAmountDao().delete(dbamount);
+                dbHelper.getAmountDao().delete(debt);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
