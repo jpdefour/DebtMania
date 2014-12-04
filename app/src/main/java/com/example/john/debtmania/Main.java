@@ -180,9 +180,6 @@ public class Main extends Activity {
         {
         }
 
-        Toast toast = Toast.makeText(this, "$" + amount + " owed for " + description + " to " + name, Toast.LENGTH_LONG);
-        toast.show();
-
         debtsOwedUser.clear();
         debtsUserOwes.clear();
         adapterUserOwes.notifyDataSetChanged();
