@@ -217,7 +217,7 @@ public class Main extends Activity {
         {
         }
 
-        Toast toast = Toast.makeText(this, "DELETED", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, name + " marked the debt for " + description + " as paid!", Toast.LENGTH_LONG);
         toast.show();
 
         debtsOwedUser.clear();
