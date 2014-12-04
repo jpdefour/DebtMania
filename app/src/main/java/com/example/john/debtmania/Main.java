@@ -194,7 +194,7 @@ public class Main extends Activity {
     public void debtCollected(String name, String description, float amount, String phoneNumber) {
         try {
             QueryBuilder<Debt, Integer> queryBuilder = dbHelper.getAmountDao().queryBuilder();
-
+            //TODO acceptable, but there is a better way to do this.
             queryBuilder
                 .where()
                 .eq("number", phoneNumber)

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class Splash extends Activity {
@@ -26,10 +27,17 @@ public class Splash extends Activity {
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), Main.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                i.putExtra("username", name.getText().toString());
-                view.getContext().startActivity(i);
+                boolean isNotEmptyText = !name.getText().toString().isEmpty();
+                if(isNotEmptyText) {
+                    Intent i = new Intent(view.getContext(), Main.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    i.putExtra("username", name.getText().toString());
+                    view.getContext().startActivity(i);
+                }
+                else {
+                    CharSequence sequence = "Not valid";
+                    Toast.makeText(view.getContext(), sequence, Toast.LENGTH_SHORT);
+                }
             }
         });
     }
