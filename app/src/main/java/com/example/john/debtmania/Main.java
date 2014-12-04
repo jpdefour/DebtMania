@@ -163,14 +163,15 @@ public class Main extends Activity {
             SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
             String currentDateandTime = date.format(new Date());
             // ORM Style mapping
-            Debt dbamount = new Debt();
-            dbamount.setName(name);
-            dbamount.setDescription(description);
-            dbamount.setDate(currentDateandTime);
-            dbamount.setAmount(-1 * amount);
+            Debt debt = new Debt();
+            debt.setName(name);
+            debt.setDescription(description);
+            debt.setDate(currentDateandTime);
+            debt.setAmount(-1 * amount);
+            debt.setNumber(phoneNumber);
 
             try {
-                dbHelper.getAmountDao().create(dbamount);
+                dbHelper.getAmountDao().create(debt);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -196,6 +197,7 @@ public class Main extends Activity {
             dbamount.setName(name);
             dbamount.setDescription(description);
             dbamount.setAmount(amount);
+            dbamount.setNumber(phoneNumber);
 
             try {
                 dbHelper.getAmountDao().delete(dbamount);

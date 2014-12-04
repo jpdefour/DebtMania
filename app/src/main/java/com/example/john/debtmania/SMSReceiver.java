@@ -35,22 +35,24 @@ public class SMSReceiver extends BroadcastReceiver {
 
         //Generates each of the given fields by separating the string at the : character
         StringTokenizer tokens = new StringTokenizer(msgString, ":");
-        type = tokens.nextToken();
-        amount = Float.valueOf(tokens.nextToken());
-        description = tokens.nextToken();
-        name = tokens.nextToken();
+        if(tokens.countTokens() == 4) {
+            type = tokens.nextToken();
+            amount = Float.valueOf(tokens.nextToken());
+            description = tokens.nextToken();
+            name = tokens.nextToken();
 
 
-        //user owes money to someone
-        if(type.equals("OWE")) {
+            //user owes money to someone
+            if (type.equals("OWE")) {
 
-            main.moneyOwed(name, description, amount, phoneNumber);
-        }
-        //user no longer owes money to someone
-        else if(type.equals("COLLECTED")) {
-            Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
-            toast.show();
-            main.debtCollected(name, description, amount, phoneNumber);
+                main.moneyOwed(name, description, amount, phoneNumber);
+            }
+            //user no longer owes money to someone
+            else if (type.equals("COLLECTED")) {
+                Toast toast = Toast.makeText(context, "$" + amount + " collected for " + description + " to " + name, Toast.LENGTH_LONG);
+                toast.show();
+                main.debtCollected(name, description, amount, phoneNumber);
+            }
         }
     }
 }

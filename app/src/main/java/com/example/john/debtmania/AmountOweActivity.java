@@ -61,18 +61,18 @@ public class AmountOweActivity extends Activity {
                     String description = etDescription.getText().toString();
                     Float  amount = Float.parseFloat(etAmount.getText().toString());
                     SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-                    String currentDateandTime = date.format(new Date());
+                    String currentDateAndTime = date.format(new Date());
                     String phnumber = etPhnum.getText().toString();
                     // ORM Style mapping
-                    Debt dbamount = new Debt();
-                    dbamount.setName(name);
-                    dbamount.setDescription(description);
-                    dbamount.setDate(currentDateandTime);
-                    dbamount.setAmount(amount);
-                    dbamount.setNumber(phnumber);
+                    Debt debt = new Debt();
+                    debt.setName(name);
+                    debt.setDescription(description);
+                    debt.setDate(currentDateAndTime);
+                    debt.setAmount(amount);
+                    debt.setNumber(phnumber);
 
                     try {
-                        dbOrmAmount.getAmountDao().create(dbamount);
+                        dbOrmAmount.getAmountDao().create(debt);
                         sendMoneyOwed(phnumber, username, description, amount);  // Send SMS to person
                         Intent i = new Intent(view.getContext(), Main.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
