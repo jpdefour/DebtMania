@@ -197,15 +197,18 @@ public class Main extends Activity {
             //TODO acceptable, but there is a better way to do this.
             queryBuilder
                 .where()
-                .eq("number", phoneNumber)
+                .eq("description", description)
                 .and()
                 .eq("amount", amount)
-                ;
+                .and()
+                .eq("name", name)
+            ;
             PreparedQuery<Debt> preparedQuery = queryBuilder.prepare();
             List<Debt> debtList = dbHelper.getAmountDao().query(preparedQuery);
             Debt debt = debtList.get(0);
             try {
-                dbHelper.getAmountDao().delete(debt);
+
+                dbHelper.getAmountDao().deleteById(debt.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
